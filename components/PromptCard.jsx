@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { VscCheck, VscCopy } from 'react-icons/vsc'
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession()
@@ -37,17 +38,15 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             </p>
           </div>
         </div>
-        <div className="copy_btn" onClick={handleCopy}>
-          <Image
-            src={
-              copied === post.prompt
-                ? '/assets/icons/tick.svg'
-                : '/assets/icons/copy.svg'
-            }
-            width={18}
-            height={18}
-            alt="copy"
-          />
+        <div
+          className="copy_btn text-orange-400 text-3xl hover:text-orange-700"
+          onClick={handleCopy}
+        >
+          {copied === post.prompt ? (
+            <VscCheck className="text-blue-400" />
+          ) : (
+            <VscCopy />
+          )}
         </div>
       </div>
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
